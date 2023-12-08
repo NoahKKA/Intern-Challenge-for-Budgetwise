@@ -2,9 +2,10 @@
   text-align: center;
 }
 
-.container {
+.main-container {
   display: flex;
   width: 100%;
+  margin: 0;
 }
 
 .left-column {
