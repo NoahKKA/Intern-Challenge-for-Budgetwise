@@ -1,8 +1,20 @@
 import React from "react";
-import { Circle, PlusCircleFill, ThreeDotsVertical } from "react-bootstrap-icons";
+import {
+  Circle,
+  PlusCircleFill,
+  ThreeDotsVertical,
+  Share,
+} from "react-bootstrap-icons";
 import { ProgressBar, Row, Col } from "react-bootstrap";
 
-export default function YourComponent() {
+export default function MainColumn() {
+  const iconButtonStyle = {
+    border: "none",
+    background: "none",
+    padding: 0,
+    cursor: "pointer",
+  };
+
   const data = [
     {
       icon: "Circle",
@@ -29,7 +41,15 @@ export default function YourComponent() {
             style={{ paddingLeft: "80px", textAlign: "start" }}
           >
             <h5 style={{ fontWeight: "bold" }}>Monthly Budget </h5>
-            <h6 className="month-selector">Month Selector</h6>
+        <select
+          id="monthSelector"
+          className="form-select"
+          style={{width:'65%', backgroundColor:'#E7F4EA',  borderRadius: '10px', border: '1px solid #9CD6AB', height:'2rem', lineHeight:'1rem', color:'#53BC70', fontWeight:'bold'}}
+        >
+          <option value="January">Jan 2023</option>
+          <option value="February">Feb 2023</option>
+          {/* Add more months as needed */}
+        </select>
           </div>
         </Col>
         <Col
@@ -37,9 +57,15 @@ export default function YourComponent() {
           md={6}
           className="d-flex align-items-center justify-content-end"
         >
-          <p>icon</p>
-          <ThreeDotsVertical size={16}/>
-          <PlusCircleFill color="#5057BE" size={32}/>
+          <button style={iconButtonStyle}>
+            <Share size={16} style={{ marginRight: "10px" }} />
+          </button>
+          <button style={iconButtonStyle}>
+            <ThreeDotsVertical size={16} style={{ marginRight: "10px" }} />
+          </button>
+          <button style={iconButtonStyle}>
+            <PlusCircleFill color="#5057BE" size={32} />
+          </button>
         </Col>
       </Row>
       <div
@@ -52,7 +78,7 @@ export default function YourComponent() {
       >
         Categories
       </div>
-      <div className="mt-4">
+      <div className="mt-4" style={{width:'120%'}}>
         {data.map((item, index) => (
           <div key={index}>
             <Row className="align-items-center mt-3">
@@ -62,7 +88,7 @@ export default function YourComponent() {
               </Col>
 
               {/* Second Column with Category and Spent */}
-              <Col xs={6} style={{ padding: "0" }}>
+              <Col xs={6} style={{ padding: "0"}}>
                 <div style={{ textAlign: "start" }}>
                   <div style={{ color: "#2A2B2B", fontWeight: "bold" }}>
                     {item.category}
@@ -89,9 +115,9 @@ export default function YourComponent() {
             </Row>
             <div
               style={{
-                borderBottom: "1px solid #DDDCDC",
+                borderBottom:'1px solid #DDDCDC',
                 width: "75%",
-                margin: "0 auto",
+                marginLeft:'80px',
                 marginTop: "10px",
                 paddingBottom: "8px",
               }}
@@ -99,10 +125,14 @@ export default function YourComponent() {
             >
               <ProgressBar
                 now={(item.spent / item.max) * 100}
+                label={`${item.spent/item.max * 100}`}
+                visuallyHidden
+                variant="success"
                 style={{
                   width: "90%",
-                  backgroundColor: "#DDDCDC",
-                  height: "10px",
+                  backgroundColor: item.color,
+                  height: "7px",
+                  borderRadius: "0"
                 }}
               />
             </div>

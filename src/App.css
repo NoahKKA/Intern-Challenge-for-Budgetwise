@@ -16,12 +16,12 @@
 }
 
 .main-column {
-  flex: 3;
+  flex: 4;
   padding: 20px;
 }
 
 .right-column {
-  flex: 2;
+  flex: 3;
   padding: 20px;
 }
 
