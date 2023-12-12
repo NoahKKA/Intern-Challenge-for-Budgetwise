@@ -10,6 +10,7 @@ import { Row, Col } from "react-bootstrap";
 import ProgressBar from "@ramonak/react-progress-bar";
 
 export default function MainColumn() {
+  const userData = Data[0]?.user1?.categories || [];
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     category: "",
@@ -27,7 +28,7 @@ export default function MainColumn() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    const submittedCategory = formData.category.toLowerCase(); 
+    const submittedCategory = formData.category.toLowerCase();
     const matchingCategory = Data[0]?.user1?.categories.find(
       (category) => category.category.toLowerCase() === submittedCategory
     );
@@ -51,7 +52,8 @@ export default function MainColumn() {
     cursor: "pointer",
   };
 
-  const userData = Data[0]?.user1?.categories || [];
+  const openModal = () => setShowForm(true);
+  const closeModal = () => setShowForm(false);
 
   return (
     <div className="main-column" style={{ borderLeft: "1px solid #dbdbdb" }}>
@@ -98,33 +100,43 @@ export default function MainColumn() {
             <ThreeDotsVertical size={16} style={{ marginRight: "10px" }} />
           </button>
           <div>
-            <button style={iconButtonStyle} onClick={() => setShowForm(!showForm)}>
+            <button
+              style={iconButtonStyle}
+              onClick={() => setShowForm(!showForm)}
+            >
               <PlusCircleFill color="#5057BE" size={44} />
             </button>
             {showForm && (
-              <form onSubmit={handleFormSubmit}>
-                <label>
-                  Category:
-                  <input
-                    type="text"
-                    name="category"
-                    value={formData.category}
-                    onChange={handleInputChange}
-                  />
-                </label>
-                <br />
-                <label>
-                  Amount:
-                  <input
-                    type="number"
-                    name="amount"
-                    value={formData.amount}
-                    onChange={handleInputChange}
-                  />
-                </label>
-                <br />
-                <button type="submit">Submit</button>
-              </form>
+              <div className="modal-overlay">
+                <div className="modal-content">
+                  <button style={iconButtonStyle} onClick={closeModal}>
+                    Close
+                  </button>
+                  <form onSubmit={handleFormSubmit}>
+                    <label>
+                      Category:
+                      <input
+                        type="text"
+                        name="category"
+                        value={formData.category}
+                        onChange={handleInputChange}
+                      />
+                    </label>
+                    <br />
+                    <label>
+                      Amount:
+                      <input
+                        type="number"
+                        name="amount"
+                        value={formData.amount}
+                        onChange={handleInputChange}
+                      />
+                    </label>
+                    <br />
+                    <button type="submit">Submit</button>
+                  </form>
+                </div>
+              </div>
             )}
           </div>
         </Col>
