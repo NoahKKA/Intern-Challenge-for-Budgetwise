@@ -52,29 +52,29 @@ export default function RightColumn() {
       <Col className="justify-content-center d-flex">
         <div
           style={{
-            border: "1px solid black",
+            border: "1px solid #DDDCDC",
+            borderRadius: "15px",
             height: "9rem",
             width: "85%",
-            borderRadius: "10px",
           }}
         >
           <Row className="mt-4 d-flex justify-content-center">
             <Col>
-              <div style={{ borderRight: "1px solid black" }}>
-                <div>Spent</div>
-                <div>${totalSpent}</div>
+              <div style={{borderRight: "2px solid #B7B6B6"}}>
+                <div style={{color:'#707171', fontSize:'.9rem'}}>Spent</div>
+                <div style={{fontSize:'1.1rem', color:'#FF5D5C', fontWeight:'bold'}}>${totalSpent}</div>
               </div>
             </Col>
             <Col>
-              <div style={{ borderRight: "1px solid black" }}>
-                <div>Available</div>
-                <div>${totalMax - totalSpent}</div>
+              <div style={{ padding:'0'}}>
+                <div style={{color:'#707171', fontSize:'.9rem'}}>Available</div>
+                <div style={{fontSize:'1.2rem', color:'#52BC71', fontWeight:'bold'}}>${totalMax - totalSpent}</div>
               </div>
             </Col>
             <Col>
-              <div>
-                <div>Budget</div>
-                <div>${totalMax}</div>
+              <div style={{borderLeft: "2px solid #B7B6B6"}}>
+                <div style={{color:'#707171', fontSize:'.9rem'}}>Budget</div>
+                <div style={{fontSize:'1.1rem', fontWeight:'bold', color:'#2B2B2A'}}>${totalMax}</div>
               </div>
             </Col>
             <div className="mt-4" style={{ width: "90%", height: "80px" }}>
@@ -102,11 +102,10 @@ export default function RightColumn() {
         <div className="d-flex justify-content-center mt-3">
           <div
             style={{
-              border: "1px solid black",
               width: "85%",
               height: "18rem",
-              border: "1px solid black",
-              borderRadius: "10px",
+              border: "1px solid #DDDCDC",
+              borderRadius: "15px",
             }}
           >
             CHART
@@ -133,8 +132,8 @@ export default function RightColumn() {
             className="mx-auto my-2 py-2"
             style={{
               width: "86%",
-              border: "1px solid black",
-              borderRadius: "10px",
+              border: "1px solid #DDDCDC",
+              borderRadius: "15px",
             }}
           >
             <Row className="align-items-center justify-content-center ">
@@ -153,7 +152,7 @@ export default function RightColumn() {
 
               <Col xs={3} style={{ width: "25%", paddingRight: "0" }}>
                 <div>
-                  <div className="text-end">${item.price}</div>
+                  <div className="text-end fw-bold">${item.price}</div>
                   <div className="text-end">{item.date}</div>
                 </div>
               </Col>
@@ -170,7 +169,7 @@ export default function RightColumn() {
           style={{ width: "86%" }}
         >
           <div style={{ fontSize: "1.3rem", fontWeight: "bold" }}>
-            Bank and Credit Cards
+            Bank & Credit Cards
           </div>
         </div>
       </div>
@@ -181,8 +180,8 @@ export default function RightColumn() {
             className="mx-auto my-2 py-2"
             style={{
               width: "86%",
-              border: "1px solid black",
-              borderRadius: "10px",
+              border: "1px solid #DDDCDC",
+              borderRadius: "15px",
             }}
           >
             <Row className="align-items-center justify-content-center ">
@@ -201,8 +200,8 @@ export default function RightColumn() {
 
               <Col xs={3} style={{ width: "25%", paddingRight: "0" }}>
                 <div>
-                  <div className="text-end">Balance</div>
-                  <div className="text-end">${item.intBalance}</div>
+                  <div className="text-end" style={{color:'#5156Be'}}>Balance</div>
+                  <div className="text-end fw-bold" style={{color:'#5156Be'}}>${item.intBalance}</div>
                 </div>
               </Col>
               <Col xs="auto">
@@ -226,8 +225,13 @@ export default function RightColumn() {
         </div>
       </div>
       <div
-        className="saving-goals-chart border mt-3 mx-auto"
-        style={{ width: "86%", height: "220px" }}
+        className="saving-goals-chart mt-3 mx-auto"
+        style={{
+          width: "86%",
+          height: "220px",
+          border: "1px solid #DDDCDC",
+          borderRadius: "15px",
+        }}
       >
         <Row className="d-flex justify-content-between">
           <Col className="mt-3" style={{ marginLeft: "23px" }}>
@@ -262,7 +266,7 @@ export default function RightColumn() {
             </div>
           </Col>
           <Col className="mt-3" style={{ marginRight: "23px" }}>
-            <div className="text-end">See Details</div>
+            <div className="fw-bold text-end" style={{color:'#5156Be'}}>See Details</div>
             <div className="mt-5">
               Total Savings: ${userDataSavingGoals.savedThisMonth} of $
               {userDataSavingGoals.totalSavings} by{" "}

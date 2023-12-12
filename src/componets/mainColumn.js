@@ -6,7 +6,8 @@ import {
   ThreeDotsVertical,
   Share,
 } from "react-bootstrap-icons";
-import { ProgressBar, Row, Col } from "react-bootstrap";
+import {Row, Col } from "react-bootstrap";
+import ProgressBar from "@ramonak/react-progress-bar";
 
 export default function MainColumn() {
   const iconButtonStyle = {
@@ -102,7 +103,7 @@ export default function MainColumn() {
             <div
               style={{
                 borderBottom:'1px solid #DDDCDC',
-                width: "75%",
+                width: "72%",
                 marginLeft:'80px',
                 marginTop: "10px",
                 paddingBottom: "8px",
@@ -110,16 +111,13 @@ export default function MainColumn() {
               className="d-flex justify-content-center"
             >
               <ProgressBar
-                now={(item.spent / item.max) * 100}
-                label={`${item.spent/item.max * 100}`}
-                visuallyHidden
-                variant="success"
-                style={{
-                  width: "90%",
-                  backgroundColor: item.color,
-                  height: "7px",
-                  borderRadius: "0"
-                }}
+                completed={(item.spent / item.max) * 100}
+                width="552px"
+                borderRadius="0"
+                height="9px"
+                bgColor={item.color}
+                baseBgColor="#DDDCDC"
+                labelColor={item.color}
               />
             </div>
           </div>
