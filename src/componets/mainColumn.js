@@ -1,4 +1,5 @@
 import React from "react";
+import Data from "../data/mockuserdata"
 import {
   Circle,
   PlusCircleFill,
@@ -15,22 +16,7 @@ export default function MainColumn() {
     cursor: "pointer",
   };
 
-  const data = [
-    {
-      icon: "Circle",
-      category: "Education",
-      spent: 50,
-      max: 100,
-      color: "#47BCC7",
-    },
-    {
-      icon: "icon2",
-      category: "Entertainment",
-      spent: 30,
-      max: 150,
-      color: "#FE8300",
-    },
-  ];
+  const userData = Data[0]?.user1?.categories || [];
 
   return (
     <div className="main-column">
@@ -79,7 +65,7 @@ export default function MainColumn() {
         Categories
       </div>
       <div className="mt-4" style={{width:'120%'}}>
-        {data.map((item, index) => (
+        {userData.map((item, index) => (
           <div key={index}>
             <Row className="align-items-center mt-3">
               {/* First Column with Icon */}
