@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Data from "../data/mockuserdata";
 import {
   Circle,
@@ -10,6 +10,40 @@ import { Row, Col } from "react-bootstrap";
 import ProgressBar from "@ramonak/react-progress-bar";
 
 export default function MainColumn() {
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+    category: "",
+    amount: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    const submittedCategory = formData.category.toLowerCase(); 
+    const matchingCategory = Data[0]?.user1?.categories.find(
+      (category) => category.category.toLowerCase() === submittedCategory
+    );
+
+    if (matchingCategory) {
+      matchingCategory.spent += parseFloat(formData.amount) || 0;
+    }
+
+    console.log("Form submitted:", formData);
+    setFormData({
+      category: "",
+      amount: "",
+    });
+    setShowForm(false);
+  };
+
   const iconButtonStyle = {
     border: "none",
     background: "none",
@@ -44,7 +78,11 @@ export default function MainColumn() {
             >
               <option value="January">Jan 2023</option>
               <option value="February">Feb 2023</option>
-              {/* Add more months as needed */}
+              <option value="March">Feb 2023</option>
+              <option value="April">Feb 2023</option>
+              <option value="May">Feb 2023</option>
+              <option value="June">Feb 2023</option>
+              <option value="July">Feb 2023</option>
             </select>
           </div>
         </Col>
@@ -59,9 +97,36 @@ export default function MainColumn() {
           <button style={iconButtonStyle}>
             <ThreeDotsVertical size={16} style={{ marginRight: "10px" }} />
           </button>
-          <button style={iconButtonStyle}>
-            <PlusCircleFill color="#5057BE" size={44} />
-          </button>
+          <div>
+            <button style={iconButtonStyle} onClick={() => setShowForm(!showForm)}>
+              <PlusCircleFill color="#5057BE" size={44} />
+            </button>
+            {showForm && (
+              <form onSubmit={handleFormSubmit}>
+                <label>
+                  Category:
+                  <input
+                    type="text"
+                    name="category"
+                    value={formData.category}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <br />
+                <label>
+                  Amount:
+                  <input
+                    type="number"
+                    name="amount"
+                    value={formData.amount}
+                    onChange={handleInputChange}
+                  />
+                </label>
+                <br />
+                <button type="submit">Submit</button>
+              </form>
+            )}
+          </div>
         </Col>
       </Row>
       <div
@@ -77,12 +142,11 @@ export default function MainColumn() {
       <div className="mt-4" style={{ width: "120%" }}>
         {userData.map((item, index) => {
           let completed;
-          if(item.spent !== 0){
+          if (item.spent !== 0) {
             completed = (item.spent / item.max) * 100;
           } else {
-            completed = 1
+            completed = 1;
           }
-          
 
           return (
             <div key={index}>

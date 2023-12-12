@@ -4,6 +4,13 @@ const Data = [
       categories: [
         {
           icon: "Circle",
+          category: "Gas",
+          spent: 30,
+          max: 150,
+          color: "#FFB900",
+        },
+        {
+          icon: "Circle",
           category: "Education",
           spent: 50,
           max: 100,
@@ -64,13 +71,6 @@ const Data = [
           spent: 35,
           max: 60,
           color: "#4E7E88",
-        },
-        {
-          icon: "Circle",
-          category: "Gas",
-          spent: 30,
-          max: 150,
-          color: "#FFB900",
         },
         {
           icon: "icon2",
