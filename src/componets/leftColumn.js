@@ -7,7 +7,14 @@ export default function LeftColumn() {
     setSelectedText(index);
   };
 
-  const leftColumnArray = ["Overview", "Budget", "Transactions", "Trends", "Savings Goals", "Alerts"]
+  const leftColumnArray = [
+    "Overview",
+    "Budget",
+    "Transactions",
+    "Trends",
+    "Savings Goals",
+    "Alerts",
+  ];
 
   const getTextStyle = (index) => {
     return {
@@ -15,7 +22,7 @@ export default function LeftColumn() {
       padding: "8px 4px",
       marginLeft: "4px",
       display: "flex",
-      alignItems:"left"
+      alignItems: "left",
     };
   };
 
@@ -23,23 +30,23 @@ export default function LeftColumn() {
     return {
       borderLeft:
         index === selectedText ? "2px solid black" : "2px solid transparent",
-        paddingLeft: "4px"
+      paddingLeft: "4px",
     };
   };
 
   return (
     <div className="left-column">
-    <div className="mt-5">
-      {leftColumnArray.map((_, index) => (
-        <div
-          key={index}
-          style={getTextStyle(index)}
-          onClick={() => handleTextClick(index)}
-        >
-          <div style={getBorderStyle(index)}>{leftColumnArray[index]}</div>
-        </div>
-      ))}
-    </div>
+      <div className="mt-5">
+        {leftColumnArray.map((_, index) => (
+          <div
+            key={index}
+            style={getTextStyle(index)}
+            onClick={() => handleTextClick(index)}
+          >
+            <div style={getBorderStyle(index)}>{leftColumnArray[index]}</div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

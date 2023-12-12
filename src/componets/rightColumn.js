@@ -1,7 +1,17 @@
 import { Col, ProgressBar, Row } from "react-bootstrap";
-import { Circle, ArrowRightShort, ArrowUpShort } from "react-bootstrap-icons";
+import {
+  Circle,
+  ArrowRightShort,
+  ArrowUpShort,
+  Plus,
+} from "react-bootstrap-icons";
 import Data from "../data/mockuserdata";
 import { useEffect, useState } from "react";
+import {
+  CircularProgressbar,
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from "react-circular-progressbar";
 
 export default function RightColumn() {
   const [totalSpent, setTotalSpent] = useState(0);
@@ -9,6 +19,7 @@ export default function RightColumn() {
   const userDataCategories = Data[0]?.user1?.categories || [];
   const userDataTransactions = Data[0]?.user1.recentTransactions || [];
   const userDataAvailableCards = Data[0]?.user1.availableCards || [];
+  const userDataSavingGoals = Data[0]?.user1.savingGoals || [];
 
   function getUserSpent() {
     const totalSpent = userDataCategories.reduce((accumulator, currentItem) => {
@@ -33,6 +44,8 @@ export default function RightColumn() {
   useEffect(() => {
     getUserMax();
   }, [totalMax]);
+
+  console.log(userDataSavingGoals);
 
   return (
     <div className="right-column">
@@ -100,7 +113,7 @@ export default function RightColumn() {
           </div>
         </div>
       </div>
-      <div className="recent-transactions-row d-flex justify-content-center mt-3">
+      <div className="recent-transactions-row d-flex justify-content-center mt-4">
         <div
           className="d-flex justify-content-between align-items-center "
           style={{ width: "86%" }}
@@ -113,7 +126,7 @@ export default function RightColumn() {
           </button>
         </div>
       </div>
-      <div className="recent-transactions-cards mt-3 main-div">
+      <div className="recent-transactions-cards mt-4 main-div">
         {userDataTransactions.map((item, index) => (
           <div
             key={index}
@@ -151,7 +164,7 @@ export default function RightColumn() {
           </div>
         ))}
       </div>
-      <div className="bank-and-credit-cards recent-transactions-row d-flex justify-content-center mt-3">
+      <div className="bank-and-credit-cards recent-transactions-row d-flex justify-content-center mt-4">
         <div
           className="d-flex justify-content-between align-items-center "
           style={{ width: "86%" }}
@@ -199,7 +212,65 @@ export default function RightColumn() {
           </div>
         ))}
       </div>
-      <div className="saving-goals"></div>
+      <div className="saving-goals recent-transactions-row d-flex justify-content-center mt-4">
+        <div
+          className="d-flex justify-content-between align-items-center "
+          style={{ width: "86%" }}
+        >
+          <div style={{ fontSize: "1.3rem", fontWeight: "bold" }}>
+            Saving Goals
+          </div>
+          <button style={{ border: "none", backgroundColor: "#fff" }}>
+            <Plus size={28} />
+          </button>
+        </div>
+      </div>
+      <div
+        className="saving-goals-chart border mt-3 mx-auto"
+        style={{ width: "86%", height: "220px" }}
+      >
+        <Row className="d-flex justify-content-between">
+          <Col className="mt-3" style={{ marginLeft: "23px" }}>
+            <div className="text-start">{userDataSavingGoals.name}</div>
+            <div style={{ width: "120px", marginTop: "23px" }}>
+              <CircularProgressbarWithChildren
+                value={
+                  (userDataSavingGoals.savedThisMonth /
+                    userDataSavingGoals.toBeSavedPerMonth) *
+                  100
+                }
+                strokeWidth={19}
+                styles={buildStyles({
+                  pathColor: "#52BC71",
+                })}
+              >
+                {" "}
+                <div
+                  style={{
+                    fontSize: "12px",
+                    color: "#000",
+                    textAlign: "center",
+                  }}
+                >
+                  ${userDataSavingGoals.savedThisMonth}
+                  <div style={{ fontSize: "10px" }}>
+                    of ${userDataSavingGoals.toBeSavedPerMonth} saved
+                  </div>
+                  <div style={{ fontSize: "10px" }}>this month</div>
+                </div>
+              </CircularProgressbarWithChildren>
+            </div>
+          </Col>
+          <Col className="mt-3" style={{ marginRight: "23px" }}>
+            <div className="text-end">See Details</div>
+            <div className="mt-5">
+              Total Savings: ${userDataSavingGoals.savedThisMonth} of $
+              {userDataSavingGoals.totalSavings} by{" "}
+              {userDataSavingGoals.dueDate}
+            </div>
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 }

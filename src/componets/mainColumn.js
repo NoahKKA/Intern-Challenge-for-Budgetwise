@@ -19,7 +19,7 @@ export default function MainColumn() {
   const userData = Data[0]?.user1?.categories || [];
 
   return (
-    <div className="main-column">
+    <div className="main-column" style={{borderLeft:'1px solid #dbdbdb'}}>
       <Row className="top-row">
         <Col xs={12} md={6}>
           <div
