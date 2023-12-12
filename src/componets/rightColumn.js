@@ -8,7 +8,6 @@ import {
 import Data from "../data/mockuserdata";
 import { useEffect, useState } from "react";
 import {
-  CircularProgressbar,
   CircularProgressbarWithChildren,
   buildStyles,
 } from "react-circular-progressbar";
@@ -45,7 +44,7 @@ export default function RightColumn() {
     getUserMax();
   }, [totalMax]);
 
-  console.log(userDataSavingGoals);
+  console.log(userDataCategories);
 
   return (
     <div className="right-column">
@@ -108,7 +107,7 @@ export default function RightColumn() {
               borderRadius: "15px",
             }}
           >
-            CHART
+            {/* <BudgetBarChart categories={userDataCategories}/> */}
           </div>
         </div>
       </div>
@@ -256,7 +255,7 @@ export default function RightColumn() {
                     textAlign: "center",
                   }}
                 >
-                  ${userDataSavingGoals.savedThisMonth}
+                  <div style={{fontWeight:'600', color:'#53BC70', fontSize:'16px'}}>${userDataSavingGoals.savedThisMonth}</div>
                   <div style={{ fontSize: "10px" }}>
                     of ${userDataSavingGoals.toBeSavedPerMonth} saved
                   </div>
